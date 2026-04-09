@@ -2,11 +2,21 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import os
 import threading
+import sys
 try:
     from PIL import Image, ImageTk
     PIL_AVAILABLE = True
 except Exception:
     PIL_AVAILABLE = False
+
+
+def resource_path(relative_path):
+    """Retorna o caminho absoluto para `relative_path`, funcionando dentro do PyInstaller."""
+    if getattr(sys, "frozen", False):
+        base = getattr(sys, "_MEIPASS", os.path.dirname(__file__))
+    else:
+        base = os.path.dirname(__file__)
+    return os.path.join(base, relative_path)
 
 from entities import Character, create_enemy
 from combat import Combat
